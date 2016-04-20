@@ -36,7 +36,7 @@ def parse_chains(chains, escape_html=True):
         for key, group in itertools.groupby(chain, lambda x: x.author.screen_name):
             merged = []
             for status in group:
-                merged.append(format_message(status.text))
+                merged.append(format_message(status.text, escape_html))
 
             merged = '\n'.join(merged)
             messages.append(merged)
