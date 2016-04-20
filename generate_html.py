@@ -17,21 +17,16 @@ parsed_chains = utils.parse_chains(chains)
 
 html = """
 <meta charset="utf-8">
-<title>Test</title>
-<script src="https://twemoji.maxcdn.com/twemoji.min.js"></script>
+<title>Messages to classify</title>
 <style>
-  /*
-    EmojiSymbols Font (c)blockworks - Kenichi Kaneko
-    http://emojisymbols.com/
-  */
   @font-face {
-    font-family: "EmojiSymbols";
-    src: url('EmojiSymbols-Regular.woff') format('woff');
+    font-family: 'Symbola';
+    src: url('Symbola.ttf') format('truetype');
     text-decoration: none;
     font-style: normal;
   }
   body {
-    font-family: 'EmojiSymbols', sans-serif;
+    font-family: 'Symbola', sans-serif;
     line-height: 1;
     font-size: 24px;
   }
