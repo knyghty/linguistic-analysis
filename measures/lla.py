@@ -6,7 +6,10 @@ def lla(target, prime):
     for token in target:
         counter += prime.count(token)
 
-    return counter / (len(prime) * len(target))
+    try:
+        return counter / (len(prime) * len(target))
+    except ZeroDivisionError:
+        return 1.0
 
 
 def lilla(target, prime):

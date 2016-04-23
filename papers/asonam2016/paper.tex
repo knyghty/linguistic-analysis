@@ -262,25 +262,33 @@ There are a number of measures designed to capture mimicry in text, [something s
 efforts have been made to compare and trial these techniques. However, few of these techniques are 
 grounded what cognitive science knows about how mimicry works within humans.
 
-[Maybe should mention here that LILLA and SILLA do mention lexical/syntactic levels explicitly which
-is probably the exception. Everything else either naturally fits into a layer (HAM), haven't really
-been used for mimicry before as far as I know (word/paragraph vectors), or aren't specifically
-targeted at a layer (LSM, Zelig). Not sure if I want to mention all this in the introduction though.]
-
-This perspective is important so that each measure is grounded [too much grounded] in reality.
+This perspective is important so that each measure is grounded in reality.
 Moreover, it suggests [does it?] that the best approach may be to combine existing measures to create
 a more holistic measure. [don't like any of this wording].
 
-[I feel like I want a "this study aims to x y and z" here]
+Of the measures discussed in this paper, only one has attempted to measure alignment with this in mind
+and some, such as LSM seem to work outside of the theory altogether.
+
+This paper aims to compare how well existing linguistic analysis techniques work to detect mimicry in 
+relation to the Interactive Alignment Model. Further, we also look at some existing techniques that 
+have not previously been used to detect mimicry and discuss their viability.
+
+[Not sure what else to put here. Section II does this, section III looks at that type thing?]
 
 
-\section{Background}
+\section{Related Work}
+This paper draws from many sources for its measures. The most similar piece of work is a comparison
+of several methods\cite{xu2015evaluation}, some discussed in this paper. It does not, however, try
+to compare the accuracy of the measures, rather, it [does some stuff I don't understand that well,
+seems like it looks at some statistical properties?]
 
-[if we only want to discuss IAM here should we retitle this section?]
+[Not sure what else to mention here]
 
+
+\section{The Interactive Alignment Model}
 The Interactive Alignment Model (IAM)\cite{pickering2004toward} is an attempt to model alignment in
-conversations. It consists of six layers, which with the exception of the top layer, the situation model,
-are all representations of some aspect of speech.
+conversations. It consists of six layers, which with the exception of the top layer, the situation
+model, are all representations of some aspect of speech.
 
 \begin{enumerate}
 	\item The situation model --- a representation of the situation being discussed
@@ -292,10 +300,7 @@ are all representations of some aspect of speech.
 	\item The phonetic representation --- something
 \end{enumerate}
 
-[Do we really need both list and figure?]
-
 The phonological and phonetic layers are ignored by this paper as they do not relate to written text.
-[should I just leave them out of the list?]
 
 The theory states that alignment "percolates" between layers such that increased alignment in one layer
 will lead to increased alignment in other layers.
@@ -305,32 +310,61 @@ will lead to increased alignment in other layers.
 	\includegraphics[width=\textwidth]{iam}
 \end{figure*}
 
-[Figure takes up over half a page. Might be an idea to use a different one, or cut off phon* layers.
-Not sure if I can go around stealing people's images either.]
-
 
 \section{Method}
-I'm not exactly sure what experiments we will have yet,
-or if we need to name this section something else entirely.
 
-Do we maybe have a subsection for each layer and a subsubsection for each measure?
-We should explain somewhere why we skip situation, phonological and phonetic layers.
+\subsection{Data}
+The dataset consists of 103 dyadic conversations taken from Twitter. Tweets were found via Twitter's 
+search API, using English language and being a reply as criteria. We then work up the chain of tweets 
+until we hit the end, or a third interlocutor is found, at which point the conversation is cut off and 
+kept, as long as there are no fewer than 10 tweets in the conversation. 200 tweets were found using 
+this method. Of these, 62 were removed as they were not true conversations (either monologues or 
+collaborative fiction writing/roleplay). 18 conversations were removed as they had significant amounts 
+of non-English text, and 17 conversations involved bots and were also removed.
+
+The data is processed as follows:
+\begin{itemize}
+	\item Screen names at the start of the message are removed. These are just the names of the 
+		  interlocutors and only add noise.
+	\item All URLs are replace with the string '[URL]'.
+	\item HTML entities such as \&amp; are converted to plain text (\&).
+	\item Any adjacent messages by the same author are merged together such that each message always
+	      alternates between the two interlocutors.
+\end{itemize}
+
+The data was classified by three PhD students at Lancaster University with backgrounds in mimicry. Each 
+conversation was classified for lexical, syntactic and semantic mimicry on a three point scale where 0 
+represents no mimicry, 1 represents low levels of mimicry at that layer, and 2 represents high levels 
+of mimicry.
+
+Each measure, with exceptions noted in following subsections [Probably just HAM at this point],
+is then run against the data such that each message from author A is compared with each message from 
+author B that occurred before the original message.
+\footnote{[I could probably make my github repo public and put a link to the code here?]}
+
+[Need to justify dataset and discuss limitations]
+
 
 \subsection{Lexical}
 Lexical stuff.
 
 \subsubsection{LILLA}
-LILLA\cite{wang2014linguistic, xu2015evaluation}
+Lexical Indiscriminate Local Linguistic Alignment (LILLA)\cite{wang2014linguistic, xu2015evaluation}
+is a measure that explicitly works at the lexical layer. It gives the probability that a word from the 
+prime document will appear at a particular position in the target document. It is defined as:
+
+\[LILLA(target, prime) = \frac{p(target|prime)}{p(target)}\]
+
 
 \subsubsection{HAM}
-HAM\cite{doyle2016robust}
+The Hierarchical Alignment Model (HAM)\cite{doyle2016robust} ...
 
 
 \subsection{Syntactic}
 Syntactic stuff.
 
 \subsubsection{SILLA}
-SILLA
+Syntactic Indiscriminate Local Linguistic Alignment (SILLA)
 
 \subsubsection{SHAM}
 SHAM
@@ -343,7 +377,7 @@ Semantic
 word2vec\cite{mikolov2013distributed}
 
 \subsubsection{doc2vec}
-doc2vec\cite{le2014distributed}. Consider also sense2vec\cite{trask2015sense2vec} and/or doc2vec sense2vec hybrid?
+doc2vec\cite{le2014distributed}.
 
 
 \subsection{Other Measures}
@@ -357,7 +391,7 @@ Zelig\cite{jones2014finding}
 
 
 \section{Results}
-Same here, not sure what results we will have.
+Still not sure how to compare everything.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -454,8 +488,6 @@ Same here, not sure what results we will have.
 % \fnbelowfloat command of the stfloats package.
 
 
-
-
 \section{Conclusion and Future Work}
 The conclusion goes here.
 
@@ -465,7 +497,7 @@ Discussion
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-Do we need to thank CREST for giving us money here?
+The authors gratefully acknowledge a grant from CREST (probably need to find the name of this).
 
 
 % trigger a \newpage just before the given reference

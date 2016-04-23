@@ -1,6 +1,10 @@
+import os
 import pickle
 
 from distutils.util import strtobool
+
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
 
 
 def query_yes_no(question, default="yes"):
@@ -12,7 +16,7 @@ def query_yes_no(question, default="yes"):
             print("Please respond with 'y' or 'n'.")
 
 
-with open('tweets.pickle', 'rb') as f:
+with open(os.path.join(DATA_DIR, 'tweets.pickle'), 'rb') as f:
     chains = pickle.load(f)
 
 keepers = []
@@ -24,5 +28,5 @@ for chain in chains:
     if is_keeper:
         keepers.append(chain)
 
-with open('selected_tweets.pickle', 'wb') as f:
+with open(os.path.join(DATA_DIR, 'selected_tweets.pickle'), 'wb') as f:
     pickle.dump(keepers, f)
