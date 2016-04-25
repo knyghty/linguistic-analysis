@@ -18,7 +18,7 @@ def build_user_tsv():
                   'numfavoritesgiven', 'creationyear', 'creationmonth', 'creationdate']
     for conversation_id, chain in enumerate(chains, 1):
         authors = {status.author for status in chain}
-        with open(os.path.join(DATA_DIR, 'ham', conversation_id.zfill(3) + '_users.tsv')) as f:
+        with open(os.path.join(DATA_DIR, 'ham', str(conversation_id).zfill(3) + '_users.tsv'), 'w') as f:
             writer = csv.DictWriter(f, dialect='excel-tab', fieldnames=fieldnames)
             for author in authors:
                 writer.writerow({
@@ -37,14 +37,14 @@ def build_user_tsv():
 
 
 def build_status_tsv():
-    fieldnames = ['msguser', 'msgtext', 'replyid', 'replyuser', 'replytext']
+    fieldnames = ['msgid', 'msguser', 'msgtext', 'replyid', 'replyuser', 'replytext']
 
     for conversation_id, chain in enumerate(chains, 1):
-        with open(os.path.join(DATA_DIR, 'ham', conversation_id.zfill(3) + '.tsv')) as f:
+        with open(os.path.join(DATA_DIR, 'ham', str(conversation_id).zfill(3) + '.tsv'), 'w') as f:
             writer = csv.DictWriter(f, dialect='excel-tab', fieldnames=fieldnames)
             previous_status = None
-            for status in chain:
-                if conversation_id == 1:
+            for counter, status in enumerate(chain):
+                if counter == 0:
                     previous_status = status
                     continue
 
@@ -56,8 +56,9 @@ def build_status_tsv():
                     'msgtext': utils.format_message(status.text, is_ham=True),
                     'replyid': previous_status.id_str,
                     'replyuser': previous_status.author.id_str,
-                    'replytext': previous_status.replytext.id_str,
+                    'replytext': utils.format_message(previous_status.text, is_ham=True),
                 })
+                previous_status = status
 
 
 build_user_tsv()
