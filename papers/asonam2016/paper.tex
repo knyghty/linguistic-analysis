@@ -229,60 +229,59 @@ Email: a.joinson@bath.ac.uk}}
 The Interactive Alignment Model is the prevailing theory of
 [I probably need some help phrasing this].
 In this study we investigate how several linguistic alignment techniques can be used
-to detect mimicry at the lexical, syntactic and situational levels of the
+to detect mimicry at the lexical, syntactic and situation levels of the
 Interactive Alignment Model.
 
 We show that [something].
 \end{abstract}
 
-% no keywords
 
-
-
-
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
 
-
 \section{Introduction}
-% no \IEEEPARstart
 
-Mimicry in online conversations is an important area of research [something about insider threats
-and maybe something about improving outcomes of tasks, using mimicry in AI, etc.]
+Mimicry in online conversations is an important and active area of research. Humans tend to mimic each
+other in many areas, such as speech
+\cite{levelt1982surface, bock1986syntactic, bock1989closed, garrod1987saying},
+physical actions\cite{bernieri1988coordinated}
+and written text{\cite{danescu2011chameleons, scissors2008linguistic}.
+People that mimic each other's language have more successful outcomes in joint tasks
+\cite{maddux2008chameleons}. Additionally, mimicry can be an indicator of insider threats
+\cite{taylor2013detecting}.
 
-There are a number of measures designed to capture mimicry in text, [something something], and some
-efforts have been made to compare and trial these techniques. However, few of these techniques are 
-grounded what cognitive science knows about how mimicry works within humans.
+There are a number of measures designed to capture mimicry in text, and some efforts have been made to
+compare and trial these techniques. However, few of these techniques are grounded what cognitive 
+science knows about how mimicry works within humans.
 
 This perspective is important so that each measure is grounded in reality.
-Moreover, it suggests [does it?] that the best approach may be to combine existing measures to create
-a more holistic measure. [don't like any of this wording].
+Moreover, it suggests that the best approach may be to combine existing measures to create
+a more holistic technique for mimicry detection.
 
-Of the measures discussed in this paper, only one has attempted to measure alignment with this in mind
-and some, such as LSM seem to work outside of the theory altogether.
+The most similar piece of work is a comparison of several methods\cite{xu2015evaluation}, some 
+discussed in this paper. However, it does not try to directly compare the accuracy of the measures,
+nor does it look at how they fit into the Interactive Alignment Model.
 
 This paper aims to compare how well existing linguistic analysis techniques work to detect mimicry in 
 relation to the Interactive Alignment Model. Further, we also look at some existing techniques that 
 have not previously been used to detect mimicry and discuss their viability.
 
-[Not sure what else to put here. Section II does this, section III looks at that type thing?]
+The novel contributions of this paper are:
+\begin{itemize}
+	\item Compares existing mimicry detection techniques and how they map to the
+		  Interactive Alignment Model
+	\item Trials techniques that have not been used for mimicry detection before.
+	\item Looks at creating hybrid techniques, combining measures together to find if they are more 
+		  accurate when combined. 
+\end{itemize}
 
-
-\section{Related Work}
-This paper draws from many sources for its measures. The most similar piece of work is a comparison
-of several methods\cite{xu2015evaluation}, some discussed in this paper. It does not, however, try
-to compare the accuracy of the measures, rather, it [does some stuff I don't understand that well,
-seems like it looks at some statistical properties?]
-
-[Not sure what else to mention here]
+This paper is divided into six sections. The next section introduces the
+Interactive Alignment Model, the psychological model of mimicry we are testing our techniques against.
+Section III gives a background of each measure tested in the paper, and defines which layer of the
+IAM (if any) the measure falls into.
+Section IV addresses the data collected and how it is processed for each technique.
+We follow in section V with a discussion of the results, and finally give our conclusions and
+suggestions for further work in section VI.
 
 
 \section{The Interactive Alignment Model}
@@ -295,15 +294,19 @@ model, are all representations of some aspect of speech.
 	\item The semantic representation --- the meaning of the utterance
 	\item The syntactic representation --- the sentence structure
 	\item The lexical representation --- the choice of words used
-	\item The phonological representation --- [I have no idea how to describe the difference between
-		phonology and phonetics]
-	\item The phonetic representation --- something
+	\item The phonological representation --- ???
+	\item The phonetic representation --- the sounds of an utterance
 \end{enumerate}
 
-The phonological and phonetic layers are ignored by this paper as they do not relate to written text.
+The phonological and phonetic representations are not discussed in this paper as they relate purely
+to the sound of speech, representations that do not exist in the written text of online conversations.
 
-The theory states that alignment "percolates" between layers such that increased alignment in one layer
-will lead to increased alignment in other layers.
+Further, the situation model is not included as there are currently no measures that can be used for
+finding alignment at the situational level.
+
+The theory states that alignment is automatic, that conversation partners will align their speech 
+towards each other at every level of the model. In addition, alignment "percolates" between layers such
+that increased alignment in one layer will lead to increased alignment in other layers.
 
 \begin{figure*}
 	\caption{The interactive alignment model}
@@ -311,9 +314,37 @@ will lead to increased alignment in other layers.
 \end{figure*}
 
 
-\section{Method}
+\section{Analysis Techniques}
 
-\subsection{Data}
+\subsection{Local Linguistic Alignment}
+Local Linguistic Alignment (LLA) is a simple,  dual purpose method that can work at both the lexical
+and syntactic layers\cite{wang2014linguistic, xu2015evaluation}.
+
+Lexical Indiscriminate Local Linguistic Alignment (LILLA) works at the lexical layer. It gives the
+probability that a word from the prime document will appear at a particular position in the target 
+document. It is defined as:
+
+\[LILLA(target, prime) = \frac{p(target|prime)}{p(target)}\]
+
+Syntactic Indiscriminate Local Linguistic Alignemnt (SILLA) works at the syntactic layer. It works
+in exactly the same way as LILLA, but rather than compare words, each sentence is annotated with a
+phrase structure tree, and LLA is run on these instead. As such, it measures the probability of a
+phrase structure subtree in the prime document appearing occurring at a given position in the target
+document. 
+
+
+\subsection{Hierarchical Alignment Model}
+\cite{doyle2016robust}
+
+\subsection{Word Vectors}
+word2vec\cite{mikolov2013distributed}
+doc2vec\cite{le2014distributed}.
+
+\subsection{Linguistic Style Matching}
+\cite{niederhoffer2002linguistic}
+
+
+\section{Method}
 The dataset consists of 103 dyadic conversations taken from Twitter. Tweets were found via Twitter's 
 search API, using English language and being a reply as criteria. We then work up the chain of tweets 
 until we hit the end, or a third interlocutor is found, at which point the conversation is cut off and 
@@ -332,62 +363,19 @@ The data is processed as follows:
 	      alternates between the two interlocutors.
 \end{itemize}
 
-The data was classified by three PhD students at Lancaster University with backgrounds in mimicry. Each 
-conversation was classified for lexical, syntactic and semantic mimicry on a three point scale where 0 
-represents no mimicry, 1 represents low levels of mimicry at that layer, and 2 represents high levels 
-of mimicry.
+[LIMITATIONS]
 
-Each measure, with exceptions noted in following subsections [Probably just HAM at this point],
-is then run against the data such that each message from author A is compared with each message from 
-author B that occurred before the original message.
+The data was classified by three researchers with backgrounds in mimicry independent of the authors of 
+this paper.
+Each  conversation was classified for lexical, syntactic and semantic mimicry on a three point scale 
+where 0 represents no mimicry, 1 represents low levels of mimicry at that layer, and 2 represents high 
+levels of mimicry. Classifications from each author were averaged together to give each conversation
+three scores between 0 and 2.
+
+Each measure is then run against the data such that each message from author A is compared with each 
+message from author B that occurred before the original message. The exception for this is HAM,
+where we have used the original implementation [need to actually do this and explain it further].
 \footnote{[I could probably make my github repo public and put a link to the code here?]}
-
-[Need to justify dataset and discuss limitations]
-
-
-\subsection{Lexical}
-Lexical stuff.
-
-\subsubsection{LILLA}
-Lexical Indiscriminate Local Linguistic Alignment (LILLA)\cite{wang2014linguistic, xu2015evaluation}
-is a measure that explicitly works at the lexical layer. It gives the probability that a word from the 
-prime document will appear at a particular position in the target document. It is defined as:
-
-\[LILLA(target, prime) = \frac{p(target|prime)}{p(target)}\]
-
-
-\subsubsection{HAM}
-The Hierarchical Alignment Model (HAM)\cite{doyle2016robust} ...
-
-
-\subsection{Syntactic}
-Syntactic stuff.
-
-\subsubsection{SILLA}
-Syntactic Indiscriminate Local Linguistic Alignment (SILLA)
-
-\subsubsection{SHAM}
-SHAM
-
-
-\subsection{Semantic}
-Semantic
-
-\subsubsection{word2vec}
-word2vec\cite{mikolov2013distributed}
-
-\subsubsection{doc2vec}
-doc2vec\cite{le2014distributed}.
-
-
-\subsection{Other Measures}
-Other
-
-\subsubsection{Linguistic Style Matching}
-LSM\cite{niederhoffer2002linguistic}
-
-\subsubsection{Zelig}
-Zelig\cite{jones2014finding}
 
 
 \section{Results}
@@ -488,11 +476,13 @@ Still not sure how to compare everything.
 % \fnbelowfloat command of the stfloats package.
 
 
-\section{Conclusion and Future Work}
-The conclusion goes here.
-
 \section{Discussion}
 Discussion
+
+
+\section{Conclusion and Future Work}
+The conclusion goes here.
+Zelig\cite{jones2014finding}
 
 
 % use section* for acknowledgment

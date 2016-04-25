@@ -10,6 +10,13 @@ def normalise_urls(text):
     return text
 
 
+def normalise_screen_names(text):
+    for word in text.split(' '):
+        if word.startswith('@'):
+            text = text.replace(word, '[MENTION]')
+    return text
+
+
 def remove_screen_names(text):
     while True:
         text = text.lstrip()
@@ -21,8 +28,11 @@ def remove_screen_names(text):
     return text
 
 
-def format_message(text, escape_html=True):
-    text = remove_screen_names(text)
+def format_message(text, escape_html=True, is_ham=False):
+    if is_ham:
+        text = normalise_screen_names(text)
+    else:
+        text = remove_screen_names(text)
     text = normalise_urls(text)
     if escape_html:
         text = html.unescape(text)
