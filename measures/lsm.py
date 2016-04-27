@@ -19,9 +19,6 @@ def dyad_lsm(doc1, doc2):
     lsm2 = lsm(doc2)
     scores = []
     for word_class in FUNCTION_CLASSES:
-        try:
-            scores.append(1 - abs(lsm1[word_class] - lsm2[word_class]) / (lsm1[word_class] + lsm2[word_class]))
-        except ZeroDivisionError:
-            scores.append(1)
+        scores.append(1 - abs(lsm1[word_class] - lsm2[word_class]) / (lsm1[word_class] + lsm2[word_class] + .0001))
 
     return statistics.mean(scores)
