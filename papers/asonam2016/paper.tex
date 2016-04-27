@@ -181,13 +181,7 @@
 \IEEEauthorblockA{Security Lancaster / CREST\\
 Lancaster University\\
 Lancaster, United Kingdom\\
-Email: \{t.carrick, a.rashid, p.j.taylor\} @lancaster.ac.uk}
-\and
-\IEEEauthorblockN{Adam Joinson}
-\IEEEauthorblockA{???\\
-University of Bath\\
-Bath, United Kingdom\\
-Email: a.joinson@bath.ac.uk}}
+Email: \{t.carrick, a.rashid, p.j.taylor\} @lancaster.ac.uk}}
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -229,7 +223,7 @@ Email: a.joinson@bath.ac.uk}}
 The Interactive Alignment Model is the prevailing theory of
 [I probably need some help phrasing this].
 In this study we investigate how several linguistic alignment techniques can be used
-to detect mimicry at the lexical, syntactic and situation levels of the
+to detect mimicry at the lexical, syntactic and semantic levels of the
 Interactive Alignment Model.
 
 We show that [something].
@@ -241,51 +235,26 @@ We show that [something].
 
 \section{Introduction}
 
-Mimicry in online conversations is an important and active area of research. Humans tend to mimic each
-other in many areas, such as speech
-\cite{levelt1982surface, bock1986syntactic, bock1989closed, garrod1987saying},
-physical actions\cite{bernieri1988coordinated}
-and written text{\cite{danescu2011chameleons, scissors2008linguistic}.
-People that mimic each other's language have more successful outcomes in joint tasks
-\cite{maddux2008chameleons}. Additionally, mimicry can be an indicator of insider threats
-\cite{taylor2013detecting}.
+Mimicry in online conversations is an important and active area of research. Humans tend to mimic each other in many areas, such as speech \cite{levelt1982surface, bock1986syntactic, bock1989closed, garrod1987saying}, physical actions \cite{bernieri1988coordinated} and written text \cite{danescu2011chameleons, scissors2008linguistic}.
 
-There are a number of measures designed to capture mimicry in text, and some efforts have been made to
-compare and trial these techniques. However, few of these techniques are grounded what cognitive 
-science knows about how mimicry works within humans.
+Existing research has shown that people who mimic each other’s language have more successful outcomes in joint tasks \cite{maddux2008chameleons}. Hence, detection of mimicry can be a valuable indicator in understanding group dynamics in collaborative settings. It can also play a role in other application areas, e.g., for detection of insider threats \cite{taylor2013detecting}.
 
-This perspective is important so that each measure is grounded in reality.
-Moreover, it suggests that the best approach may be to combine existing measures to create
-a more holistic technique for mimicry detection.
+There are a number of measures designed to capture mimicry in text, and some efforts have been made to compare and trial these techniques. However, few of these techniques are grounded in what cognitive  science knows about how mimicry works within humans.
 
-The most similar piece of work is a comparison of several methods\cite{xu2015evaluation}, some 
-discussed in this paper. However, it does not try to directly compare the accuracy of the measures,
-nor does it look at how they fit into the Interactive Alignment Model.
-
-This paper aims to compare how well existing linguistic analysis techniques work to detect mimicry in 
-relation to the Interactive Alignment Model. Further, we also look at some existing techniques that 
-have not previously been used to detect mimicry and discuss their viability.
-
-The novel contributions of this paper are:
+This paper addresses this limitation by contrasting how well existing linguistic analysis techniques work to detect mimicry in relation to the Interactive Alignment Model. Further, we also consider some existing techniques that have not previously been used to detect mimicry and discuss their viability. The novel contributions of this paper are as follows:
 \begin{itemize}
-	\item Compares existing mimicry detection techniques and how they map to the
-		  Interactive Alignment Model
-	\item Trials techniques that have not been used for mimicry detection before.
-	\item Looks at creating hybrid techniques, combining measures together to find if they are more 
-		  accurate when combined. 
+	\item We compare existing mimicry detection techniques and how they map to the Interactive Alignment Model 
+	\item  We evaluate techniques that have not been used for mimicry detection before and discuss their feasibility in this regard.
+	\item On the basis of our analysis, we posit that hybrid techniques, composing multiple measures, may offer a more holistic approach for mimicry detection.
 \end{itemize}
 
-This paper is divided into six sections. The next section introduces the
-Interactive Alignment Model, the psychological model of mimicry we are testing our techniques against.
-Section III gives a background of each measure tested in the paper, and defines which layer of the
-IAM (if any) the measure falls into.
-Section IV addresses the data collected and how it is processed for each technique.
-We follow in section V with a discussion of the results, and finally give our conclusions and
-suggestions for further work in section VI.
+Existing work has compared several methods, e.g., \cite{xu2015evaluation}, including some discussed in this paper. However, such works do not aim to contrast the effectiveness of the measures with regards to cognitive models such as the Interactive Alignment Model. To our knowledge, our work is the first to undertake such a comparison.
+
+The rest of this paper is structured as follows. In Section II, we briefly introduce the Interactive Alignment Model - the psychological model of mimicry against which we test our techniques. Section III provides a brief introduction to each measure tested in the paper, and defines the layer of the IAM (if any) in which the measure resides. Section IV describes the data set used in our analysis. Section V presents the results of our analysis and highlights the importance of composing multiple measures. Finally, Section VI concludes the paper and identifies directions for future work.
 
 
 \section{The Interactive Alignment Model}
-The Interactive Alignment Model (IAM)\cite{pickering2004toward} is an attempt to model alignment in
+The Interactive Alignment Model (IAM) \cite{pickering2004toward} is an attempt to model alignment in
 conversations. It consists of six layers, which with the exception of the top layer, the situation
 model, are all representations of some aspect of speech.
 
@@ -318,7 +287,7 @@ that increased alignment in one layer will lead to increased alignment in other 
 
 \subsection{Local Linguistic Alignment}
 Local Linguistic Alignment (LLA) is a simple,  dual purpose method that can work at both the lexical
-and syntactic layers\cite{wang2014linguistic, xu2015evaluation}.
+and syntactic layers \cite{wang2014linguistic, xu2015evaluation}.
 
 Lexical Indiscriminate Local Linguistic Alignment (LILLA) works at the lexical layer. It gives the
 probability that a word from the prime document will appear at a particular position in the target 
@@ -327,21 +296,39 @@ document. It is defined as:
 \[LILLA(target, prime) = \frac{p(target|prime)}{p(target)}\]
 
 Syntactic Indiscriminate Local Linguistic Alignemnt (SILLA) works at the syntactic layer. It works
-in exactly the same way as LILLA, but rather than compare words, each sentence is annotated with a
+in exactly the same way as LILLA, but instead of comparing words, each sentence is annotated with a
 phrase structure tree, and LLA is run on these instead. As such, it measures the probability of a
 phrase structure subtree in the prime document appearing occurring at a given position in the target
 document. 
 
 
 \subsection{Hierarchical Alignment Model}
-\cite{doyle2016robust}
+The Hierarchical Alignment Model (HAM) \cite{doyle2016robust} is ...
+So it finds the most common words, uses these as markers, then looks at how often these markers
+appear.
 
-\subsection{Word Vectors}
-word2vec\cite{mikolov2013distributed}
-doc2vec\cite{le2014distributed}.
+\subsection{Word and Document Vectors}
+Word2vec \cite{mikolov2013efficient, mikolov2013distributed} is a machine learning technique that,
+given a word, tries to predict the two adjacent words. Each word is then mapped to vector space
+and can be directly compared. The closer the two word vectors to each other, the more semantically
+related they are.
 
-\subsection{Linguistic Style Matching}
-\cite{niederhoffer2002linguistic}
+Doc2vec \cite{le2014distributed} works on the same principle as Word2vec. Here, each word is mapped to
+a unique vector, and each paragraph is also mapped to a vector, which contribute to predicting the next
+word in the paragraph. It can be used with not only paragraphs, but with sentences or entire documents.
+
+[I can't find any pretrained doc2vec models trained on twitter data and don't have the data to do it
+myself so this might end up relegated to future work] 
+
+\subsection{Language Style Matching}
+Language Style Matching (LSM) \cite{ireland2010language, ireland2011language}
+is a measure that counts the usage of function words by an interlocutor.
+For each class of function word (e.g., determiners, pronouns, adpositions), the number of words is 
+calculated as a percentage of the total document, which is the score for each class. Scores are 
+calculated between the dyad using a weighted difference, shown below, and these scores averaged to 
+produce a single LSM score for that dyad.
+
+\[ LSM_{class} = 1 - [(|class_1 - class_2|)] / (class_1 + class_2 + .0001) \]
 
 
 \section{Method}
@@ -351,19 +338,22 @@ until we hit the end, or a third interlocutor is found, at which point the conve
 kept, as long as there are no fewer than 10 tweets in the conversation. 200 tweets were found using 
 this method. Of these, 62 were removed as they were not true conversations (either monologues or 
 collaborative fiction writing/roleplay). 18 conversations were removed as they had significant amounts 
-of non-English text, and 17 conversations involved bots and were also removed.
+of non-English text. 17 conversations involved bots and were also removed.
 
-The data is processed as follows:
+The data was processed as follows:
 \begin{itemize}
-	\item Screen names at the start of the message are removed. These are just the names of the 
+	\item Screen names at the start of the message were removed. These are just the names of the 
 		  interlocutors and only add noise.
-	\item All URLs are replace with the string '[URL]'.
-	\item HTML entities such as \&amp; are converted to plain text (\&).
-	\item Any adjacent messages by the same author are merged together such that each message always
+	\item All URLs were replaced with the string '[URL]'.
+	\item HTML entities such as \&amp; were converted to plain text (\&).
+	\item Any adjacent messages by the same author were merged together such that each message always
 	      alternates between the two interlocutors.
 \end{itemize}
 
-[LIMITATIONS]
+The dataset is small, which is both an advantage as it is possible to classify the data manually
+and a disadvantage in that the sample size is smaller. We did not actively seek out mimicry by
+targeting our search as it was important to have conversations that would test negatively for mimicry
+as well as positively.
 
 The data was classified by three researchers with backgrounds in mimicry independent of the authors of 
 this paper.
@@ -372,9 +362,12 @@ where 0 represents no mimicry, 1 represents low levels of mimicry at that layer,
 levels of mimicry. Classifications from each author were averaged together to give each conversation
 three scores between 0 and 2.
 
-Each measure is then run against the data such that each message from author A is compared with each 
-message from author B that occurred before the original message. The exception for this is HAM,
-where we have used the original implementation [need to actually do this and explain it further].
+Each measure was then run against the data such that each message from author A is compared with each 
+message from author B that occurred before the original message.
+
+HAM is treated differently as it requires data to be set up in a different way.
+Here we have reused the original implementation, and have formatted the data into tab separated
+values files with each row being a pair of tweets, with an extra TSV file to store user information.
 \footnote{[I could probably make my github repo public and put a link to the code here?]}
 
 
@@ -482,12 +475,12 @@ Discussion
 
 \section{Conclusion and Future Work}
 The conclusion goes here.
-Zelig\cite{jones2014finding}
+Zelig \cite{jones2014finding}
 
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-The authors gratefully acknowledge a grant from CREST (probably need to find the name of this).
+This research is funded by the Engineering and Social Sciences (ESRC) Centre for Behavioural and Social Science Approaches to Security (CREST).
 
 
 % trigger a \newpage just before the given reference
