@@ -4,6 +4,8 @@ import sys
 
 import tweepy
 
+from core import constants
+
 
 CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
@@ -82,5 +84,5 @@ while len(chains) < 200:
 
     page += 1
 
-with open('tweets.pickle', 'wb') as f:
+with open(os.path.join(constants.DATA_DIR, 'tweets.pickle'), 'wb') as f:
     pickle.dump(chains, f)

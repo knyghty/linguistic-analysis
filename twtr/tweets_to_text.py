@@ -1,7 +1,10 @@
+import os
 import pickle
 
+from core import constants
 
-with open('selected_tweets.pickle', 'rb') as f:
+
+with open(os.path.join(constants.DATA_DIR, 'selected_tweets.pickle'), 'rb') as f:
     chains = pickle.load(f)
 
 

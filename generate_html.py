@@ -2,15 +2,11 @@ import itertools
 import os
 import pickle
 
+from core import constants
 from twtr import utils
 
 
-BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, 'twtr', 'data')
-HTML_DIR = os.path.join(BASE_DIR, 'html')
-
-
-with open(os.path.join(DATA_DIR, 'selected_tweets.pickle'), 'rb') as f:
+with open(os.path.join(constants.DATA_DIR, 'selected_tweets.pickle'), 'rb') as f:
     chains = pickle.load(f)
 
 parsed_chains = utils.parse_chains(chains)
@@ -41,5 +37,5 @@ for counter, chain in parsed_chains.items():
             author=next(author), message=message
         ).replace('\n', '<br>')
 
-with open(os.path.join(HTML_DIR, 'messages.html'), 'w') as f:
+with open(os.path.join(constants.HTML_DIR, 'messages.html'), 'w') as f:
     f.write(html)
