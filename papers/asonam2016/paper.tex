@@ -1,14 +1,15 @@
 \documentclass[conference]{IEEEtran}
 \usepackage[style=ieee, backend=biber]{biblatex}
+\usepackage[T1]{fontenc}
 
 \ifCLASSINFOpdf
 	\usepackage[pdftex]{graphicx}
 	\graphicspath{{img/}}
-	\DeclareGraphicsExtensions{.pdf,.jpg,.png}
+	\DeclareGraphicsExtensions{.pdf,.jpg,.png, .eps}
 \else
 	\usepackage[dvips]{graphicx}
  	\graphicspath{{img/}}
-	\DeclareGraphicsExtensions{.pdf,.jpg,.png}
+	\DeclareGraphicsExtensions{.pdf,.jpg,.png, .eps}
 \fi
 
 
@@ -146,7 +147,7 @@
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
-%\usepackage{url}
+\usepackage{url}
 % url.sty was written by Donald Arseneau. It provides better support for
 % handling and breaking URLs. url.sty is already installed on most LaTeX
 % systems. The latest version and documentation can be obtained at:
@@ -220,11 +221,8 @@ Email: \{t.carrick, a.rashid, p.j.taylor\} @lancaster.ac.uk}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The Interactive Alignment Model is the prevailing theory of
-[I probably need some help phrasing this].
-In this study we investigate how several linguistic alignment techniques can be used
-to detect mimicry at the lexical, syntactic and semantic levels of the
-Interactive Alignment Model.
+The Interactive Alignment Model is the prevailing theory of linguistic alignment works from a psychological standpoint.
+In this study we investigate how several linguistic alignment techniques can be used to detect mimicry at the lexical, syntactic and semantic levels of the Interactive Alignment Model.
 
 We show that [something].
 \end{abstract}
@@ -254,28 +252,22 @@ The rest of this paper is structured as follows. In Section II, we briefly intro
 
 
 \section{The Interactive Alignment Model}
-The Interactive Alignment Model (IAM) \cite{pickering2004toward} is an attempt to model alignment in
-conversations. It consists of six layers, which with the exception of the top layer, the situation
-model, are all representations of some aspect of speech.
+The Interactive Alignment Model (IAM) \cite{pickering2004toward} is an attempt to model alignment in conversations. It consists of six layers, which with the exception of the top layer, the situation model, are all representations of some aspect of speech.
 
 \begin{enumerate}
 	\item The situation model --- a representation of the situation being discussed
 	\item The semantic representation --- the meaning of the utterance
 	\item The syntactic representation --- the sentence structure
 	\item The lexical representation --- the choice of words used
-	\item The phonological representation --- ???
+	\item The phonological representation --- the abstract representation of word sounds
 	\item The phonetic representation --- the sounds of an utterance
 \end{enumerate}
 
-The phonological and phonetic representations are not discussed in this paper as they relate purely
-to the sound of speech, representations that do not exist in the written text of online conversations.
+The phonological and phonetic representations are not discussed in this paper as they relate purely to the sound of speech, representations that do not exist in the written text of online conversations.
 
-Further, the situation model is not included as there are currently no measures that can be used for
-finding alignment at the situational level.
+Further, the situation model is not included as there are currently no measures that can be used for finding alignment at the situational level.
 
-The theory states that alignment is automatic, that conversation partners will align their speech 
-towards each other at every level of the model. In addition, alignment "percolates" between layers such
-that increased alignment in one layer will lead to increased alignment in other layers.
+The theory states that alignment is automatic, that conversation partners will align their speech  towards each other at every level of the model. In addition, alignment "percolates" between layers such that increased alignment in one layer will lead to increased alignment in other layers.
 
 \begin{figure*}
 	\caption{The interactive alignment model}
@@ -285,60 +277,38 @@ that increased alignment in one layer will lead to increased alignment in other 
 
 \section{Analysis Techniques}
 
-\subsection{Local Linguistic Alignment}
-Local Linguistic Alignment (LLA) is a simple,  dual purpose method that can work at both the lexical
-and syntactic layers \cite{wang2014linguistic, xu2015evaluation}.
+There are many techniques that work at the lexical level, many of which can be re-purposed to be used at the syntactic level by replacing the words with phrase or dependency tree notation. One technique was used to represent each IAM layer, and one technique that works outside of the IAM.
 
-Lexical Indiscriminate Local Linguistic Alignment (LILLA) works at the lexical layer. It gives the
-probability that a word from the prime document will appear at a particular position in the target 
-document. It is defined as:
+The criteria for choosing techniques were:
+
+\begin{itemize}
+	\item Newer techniques were preferred over older ones.
+	\item Availability of a source implementation or simplicity of implementation
+\end{itemize}
+
+
+\subsection{Local Linguistic Alignment}
+Local Linguistic Alignment (LLA) is a simple,  dual purpose method that can work at both the lexical and syntactic layers \cite{wang2014linguistic, xu2015evaluation}.
+
+Lexical Indiscriminate Local Linguistic Alignment (LILLA) works at the lexical layer. It gives the probability that a word from the prime document will appear at a particular position in the target  document. It is defined as:
 
 \[LILLA(target, prime) = \frac{p(target|prime)}{p(target)}\]
 
-Syntactic Indiscriminate Local Linguistic Alignemnt (SILLA) works at the syntactic layer. It works
-in exactly the same way as LILLA, but instead of comparing words, each sentence is annotated with a
-phrase structure tree, and LLA is run on these instead. As such, it measures the probability of a
-phrase structure subtree in the prime document appearing occurring at a given position in the target
-document. 
+Syntactic Indiscriminate Local Linguistic Alignemnt (SILLA) works at the syntactic layer. It works in exactly the same way as LILLA, but instead of comparing words, each sentence is annotated with a phrase structure tree, and LLA is run on these instead. As such, it measures the probability of a phrase structure subtree in the prime document appearing occurring at a given position in the target document.
 
+\subsection{Word Vectors}
+Word2vec \cite{mikolov2013efficient, mikolov2013distributed} is a machine learning technique that, given a word, tries to predict the two adjacent words. Each word is then mapped to vector space and can be directly compared. The closer the two word vectors to each other, the more semantically related they are.
 
-\subsection{Hierarchical Alignment Model}
-The Hierarchical Alignment Model (HAM) \cite{doyle2016robust} is ...
-So it finds the most common words, uses these as markers, then looks at how often these markers
-appear.
-
-\subsection{Word and Document Vectors}
-Word2vec \cite{mikolov2013efficient, mikolov2013distributed} is a machine learning technique that,
-given a word, tries to predict the two adjacent words. Each word is then mapped to vector space
-and can be directly compared. The closer the two word vectors to each other, the more semantically
-related they are.
-
-Doc2vec \cite{le2014distributed} works on the same principle as Word2vec. Here, each word is mapped to
-a unique vector, and each paragraph is also mapped to a vector, which contribute to predicting the next
-word in the paragraph. It can be used with not only paragraphs, but with sentences or entire documents.
-
-[I can't find any pretrained doc2vec models trained on twitter data and don't have the data to do it
-myself so this might end up relegated to future work] 
+While word vectors have not been used to measure mimicry before, we posit that it may give good results for finding mimicry as it gets good results in the related field of sentiment analysis and is used to find semantic similarity of texts.
 
 \subsection{Language Style Matching}
-Language Style Matching (LSM) \cite{ireland2010language, ireland2011language}
-is a measure that counts the usage of function words by an interlocutor.
-For each class of function word (e.g., determiners, pronouns, adpositions), the number of words is 
-calculated as a percentage of the total document, which is the score for each class. Scores are 
-calculated between the dyad using a weighted difference, shown below, and these scores averaged to 
-produce a single LSM score for that dyad.
+Language Style Matching (LSM) \cite{ireland2010language, ireland2011language} is a measure that counts the usage of function words by an interlocutor. For each class of function word (e.g., determiners, pronouns, adpositions), the number of words is  calculated as a percentage of the total document, which is the score for each class. Scores are calculated between the dyad using a weighted difference, shown below, and these scores averaged to produce a single LSM score for that dyad.
 
 \[ LSM_{class} = 1 - [(|class_1 - class_2|)] / (class_1 + class_2 + .0001) \]
 
 
 \section{Method}
-The dataset consists of 103 dyadic conversations taken from Twitter. Tweets were found via Twitter's 
-search API, using English language and being a reply as criteria. We then work up the chain of tweets 
-until we hit the end, or a third interlocutor is found, at which point the conversation is cut off and 
-kept, as long as there are no fewer than 10 tweets in the conversation. 200 tweets were found using 
-this method. Of these, 62 were removed as they were not true conversations (either monologues or 
-collaborative fiction writing/roleplay). 18 conversations were removed as they had significant amounts 
-of non-English text. 17 conversations involved bots and were also removed.
+The dataset consists of 103 dyadic conversations taken from Twitter. Tweets were found via Twitter's  search API, using English language and being a reply as criteria. We then work up the chain of tweets  until we hit the end, or a third interlocutor is found, at which point the conversation is cut off and  kept, as long as there are no fewer than 10 tweets in the conversation. 200 tweets were found using  this method. Of these, 62 were removed as they were not true conversations (either monologues or  collaborative fiction writing/roleplay). 18 conversations were removed as they had significant amounts  of non-English text. 17 conversations involved bots and were also removed.
 
 The data was processed as follows:
 \begin{itemize}
@@ -350,29 +320,67 @@ The data was processed as follows:
 	      alternates between the two interlocutors.
 \end{itemize}
 
-The dataset is small, which is both an advantage as it is possible to classify the data manually
-and a disadvantage in that the sample size is smaller. We did not actively seek out mimicry by
-targeting our search as it was important to have conversations that would test negatively for mimicry
-as well as positively.
+The dataset is small, which is both an advantage as it is possible to classify the data manually and a disadvantage in that the sample size is smaller. We did not actively seek out mimicry by targeting our search as it was important to have conversations that would test negatively for mimicry as well as positively.
 
-The data was classified by three researchers with backgrounds in mimicry independent of the authors of 
-this paper.
-Each  conversation was classified for lexical, syntactic and semantic mimicry on a three point scale 
-where 0 represents no mimicry, 1 represents low levels of mimicry at that layer, and 2 represents high 
-levels of mimicry. Classifications from each author were averaged together to give each conversation
-three scores between 0 and 2.
+The data was classified by three researchers with backgrounds in mimicry independent of the authors of  this paper. Each  conversation was classified for lexical, syntactic and semantic mimicry on a three point scale  where 0 represents no mimicry, 1 represents low levels of mimicry at that layer, and 2 represents high  levels of mimicry. Classifications from each author were averaged together to give each conversation three scores between 0 and 2.
 
-Each measure was then run against the data such that each message from author A is compared with each 
-message from author B that occurred before the original message.
+Each measure was then run against the data such that each message from author A is compared with each  message from author B that occurred before the original message.
 
-HAM is treated differently as it requires data to be set up in a different way.
-Here we have reused the original implementation, and have formatted the data into tab separated
-values files with each row being a pair of tweets, with an extra TSV file to store user information.
 \footnote{[I could probably make my github repo public and put a link to the code here?]}
 
 
 \section{Results}
-Still not sure how to compare everything.
+
+In general, the human classifiers agreed with each other, but the agreement is fairly weak. They most strongly agreed on syntactic mimicry, \(r > 0.28, < 0.36, p < 0.004\). Additionally there seemed to be more agreement on lexical mimicry than semantic, but p values are too high to make a definitive judgment.
+
+The mean scores from human classifiers also show positive but weak correlation with the scores from their respective techniques. Additionally means of all human classifier scores were used as a comparison with LSM. These correlations can be seen in Table \ref{scores_techniques}.
+
+\begin{table}[!t]
+\caption{Correlations of Classifier Scores and Techniques}
+\label{scores_techniques}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c}
+Layer, Technique & r & p \\
+\hline
+Lexical, LILLA & 0.27 & 0.005 \\
+Syntactic, SILLA & 0.19 & 0.057 \\
+Semantic, Word2vec & 0.11 & 0.231 \\
+N/A (mean scores), LSM & 0.16 & 0.111 \\
+\end{tabular}
+\end{table}
+
+To observe the IAM's prediction that increased levels of mimicry on one layer results in a higher probability of mimicry in other adjacent layers, we looked at the correlations between the results of our techniques, in Table \ref{techniques}, and also between the results of the human classifiers, in Table \ref{classifications}.
+
+\begin{table}[!t]
+\caption{Correlations of Techniques}
+\label{techniques}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c}
+Technique & r & p \\
+\hline
+LILLA, SILLA & 0.26 & 0.007 \\
+LILLA, Word2vec & -0.31 & 0.002 \\
+SILLA, Word2vec & -0.81 & < 0.001
+\end{tabular}
+\end{table}
+
+\begin{table}[!t]
+\caption{Correlations of Human Classifications}
+\label{classifications}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c}
+Layer & r & p \\
+\hline
+Lexical, Syntactic & 0.57 & < 0.001 \\
+Lexical, Semantic & 0.33 & < 0.001 \\
+Syntactic, Semantic & 0.28 & 0.005
+\end{tabular}
+\end{table}
+
+
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -428,45 +436,6 @@ Still not sure how to compare everything.
 % subcaption is not desired, just leave its contents blank,
 % e.g., \subfloat[].
 
-
-% An example of a floating table. Note that, for IEEE style tables, the
-% \caption command should come BEFORE the table and, given that table
-% captions serve much like titles, are usually capitalized except for words
-% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
-% and up, which are usually not capitalized unless they are the first or
-% last word of the caption. Table text will default to \footnotesize as
-% the IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
-
-
-% Note that the IEEE does not put floats in the very first column
-% - or typically anywhere on the first page for that matter. Also,
-% in-text middle ("here") positioning is typically not used, but it
-% is allowed and encouraged for Computer Society conferences (but
-% not Computer Society journals). Most IEEE journals/conferences use
-% top floats exclusively. 
-% Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the
-% \fnbelowfloat command of the stfloats package.
 
 
 \section{Discussion}
