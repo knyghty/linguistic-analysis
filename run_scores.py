@@ -37,3 +37,9 @@ print('Mean vs LSM: r={r}, p={p:.20f}'.format(r=r, p=p))
 
 r, p = stats.pearsonr(lexical_scores, lsm_scores)
 print('Lexical vs LSM: r={r}, p={p:.20f}'.format(r=r, p=p))
+
+r, p = stats.pearsonr(syntactic_scores, lsm_scores)
+print('Syntactic vs LSM: r={r}, p={p:.20f}'.format(r=r, p=p))
+
+r, p = stats.pearsonr(semantic_scores, lsm_scores)
+print('Semantic vs LSM: r={r}, p={p:.20f}'.format(r=r, p=p))
