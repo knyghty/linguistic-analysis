@@ -11,7 +11,7 @@ from twtr import utils
 
 
 nlp = English()
-nlp.vocab.load_vectors(os.path.join(constants.DATA_DIR, 'word2vec_twitter_model.bin'))
+# nlp.vocab.load_vectors(os.path.join(constants.DATA_DIR, 'word2vec_twitter_model.bin'))
 
 
 with open(os.path.join(constants.DATA_DIR, 'selected_tweets.pickle'), 'rb') as f:
@@ -44,10 +44,14 @@ for chain_id, chain in parsed_chains.items():
             lsm_scores.append(float(lsm.dyad_lsm(message_a['spacy'], message_b['spacy'])))
             wv_scores.append(float(message_a['spacy'].similarity(message_b['spacy'])))
 
+    spacy_a = nlp('\n'.join(chain[::2]))
+    spacy_b = nlp('\n'.join(chain[1::2]))
+
     chain_scores[chain_id]['lilla'] = statistics.mean(lilla_scores)
     chain_scores[chain_id]['silla'] = statistics.mean(silla_scores)
     chain_scores[chain_id]['lsm'] = statistics.mean(lsm_scores)
     chain_scores[chain_id]['wv'] = statistics.mean(wv_scores)
+    chain_scores[chain_id]['wv_conversation'] = spacy_a.similarity(spacy_b)
 
 with open(os.path.join(constants.DATA_DIR, 'scores.pickle'), 'wb') as f:
     pickle.dump(chain_scores, f)
