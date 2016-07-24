@@ -2,6 +2,8 @@
 \usepackage[style=ieee, backend=biber]{biblatex}
 \usepackage[T1]{fontenc}
 \usepackage{array}
+\usepackage{url}
+\usepackage{eso-pic}
 
 \ifCLASSINFOpdf
 	\usepackage[pdftex]{graphicx}
@@ -13,137 +15,27 @@
 	\DeclareGraphicsExtensions{.pdf,.jpg,.png, .eps}
 \fi
 
-
-% *** MATH PACKAGES ***
-%
-%\usepackage{amsmath}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics.
-%
-% Note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
-%\interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/amsmath
-
-
-
-
-
-% *** SPECIALIZED LIST PACKAGES ***
-%
-%\usepackage{algorithmic}
-% algorithmic.sty was written by Peter Williams and Rogerio Brito.
-% This package provides an algorithmic environment fo describing algorithms.
-% You can use the algorithmic environment in-text or within a figure
-% environment to provide for a floating algorithm. Do NOT use the algorithm
-% floating environment provided by algorithm.sty (by the same authors) or
-% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
-% algorithm float types and packages that provide these will not provide
-% correct IEEE style captions. The latest version and documentation of
-% algorithmic.sty can be obtained at:
-% http://www.ctan.org/pkg/algorithms
-% Also of interest may be the (relatively newer and more customizable)
-% algorithmicx.sty package by Szasz Janos:
-% http://www.ctan.org/pkg/algorithmicx
-
-
-% *** SUBFIGURE PACKAGES ***
-%\ifCLASSOPTIONcompsoc
-%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
-%\else
-%  \usepackage[caption=false,font=footnotesize]{subfig}
-%\fi
-% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
-% for subfigure.sty, the latter of which is no longer maintained and is
-% incompatible with some LaTeX packages including fixltx2e. However,
-% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
-% which will override IEEEtran.cls' handling of captions and this will result
-% in non-IEEE style figure/table captions. To prevent this problem, be sure
-% and invoke subfig.sty's "caption=false" package option (available since
-% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
-% handling of captions.
-% Note that the Computer Society format requires a larger sans serif font
-% than the serif footnote size font used in traditional IEEE formatting
-% and thus the need to invoke different subfig.sty package options depending
-% on whether compsoc mode has been enabled.
-%
-% The latest version and documentation of subfig.sty can be obtained at:
-% http://www.ctan.org/pkg/subfig
-
-
-
-
-% *** FLOAT PACKAGES ***
-%
-%\usepackage{fixltx2e}
-% fixltx2e, the successor to the earlier fix2col.sty, was written by
-% Frank Mittelbach and David Carlisle. This package corrects a few problems
-% in the LaTeX2e kernel, the most notable of which is that in current
-% LaTeX2e releases, the ordering of single and double column floats is not
-% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
-% single column figure to be placed prior to an earlier double column
-% figure.
-% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
-% corrections already built into the system in which case a warning will
-% be issued if an attempt is made to load fixltx2e.sty as it is no longer
-% needed.
-% The latest version and documentation can be found at:
-% http://www.ctan.org/pkg/fixltx2e
-
-
-%\usepackage{stfloats}
-% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
-% the ability to do double column floats at the bottom of the page as well
-% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
-% LaTeX2e). It also provides a command:
-%\fnbelowfloat
-% to enable the placement of footnotes below bottom floats (the standard
-% LaTeX2e kernel puts them above bottom floats). This is an invasive package
-% which rewrites many portions of the LaTeX2e float routines. It may not work
-% with other packages that modify the LaTeX2e float routines. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/stfloats
-% Do not use the stfloats baselinefloat ability as the IEEE does not allow
-% \baselineskip to stretch. Authors submitting work to the IEEE should note
-% that the IEEE rarely uses double column equations and that authors should try
-% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
-% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
-% such ways.
-% Do not attempt to use stfloats with fixltx2e as they are incompatible.
-% Instead, use Morten Hogholm'a dblfloatfix which combines the features
-% of both fixltx2e and stfloats:
-%
-% \usepackage{dblfloatfix}
-% The latest version can be found at:
-% http://www.ctan.org/pkg/dblfloatfix
-
-
-\usepackage{url}
-% url.sty was written by Donald Arseneau. It provides better support for
-% handling and breaking URLs. url.sty is already installed on most LaTeX
-% systems. The latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/url
-% Basically, \url{my_url_here}.
-
-% correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
-
 
 \bibliography{paper.bib}
 
-
 \begin{document}
-\title{Mimicry in Online Conversations: An Exploratory Study of Linguistic Analysis Techniques}
 
+\IEEEoverridecommandlockouts 
+\IEEEpubid{\begin{minipage}{\textwidth}\ \\[30pt] \\\textbf{IEEE/ACM ASONAM 2016, August 18-21, 2016, San Francisco, CA, USA\\ 978-1-5090-2846-7/16/\$31.00\copyright2016 IEEE} \end{minipage}} 
+
+\AddToShipoutPictureBG*{ 
+\AtPageUpperLeft{ 
+\setlength\unitlength{1in} 
+\hspace*{\dimexpr0.5\paperwidth\relax}
+\makebox(0,-0.75)[c]{\textbf{2016 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining (ASONAM)}}}} 
+
+\title{Mimicry in Online Conversations: An Exploratory Study of Linguistic Analysis Techniques}
 \author{\IEEEauthorblockN{Tom Carrick, Awais Rashid, Paul J Taylor}
 \IEEEauthorblockA{Security Lancaster / CREST\\
 Lancaster University\\
 Lancaster, United Kingdom\\
 Email: \{t.carrick, a.rashid, p.j.taylor\} @lancaster.ac.uk}}
-
 
 \maketitle
 
@@ -160,7 +52,7 @@ A number of computational techniques have been proposed that aim to detect mimic
 
 When interacting with others, humans show a tendency to mimic one another's behavior, including speech \cite{levelt1982surface, bock1986syntactic, bock1989closed, garrod1987saying}, physical actions \cite{bernieri1988coordinated} and written text \cite{danescu2011chameleons, scissors2008linguistic}. Existing research has shown that people who mimic each other's language have more successful outcomes in joint tasks \cite{richardson2014language}, and that decreasing mimicry can be an indicator of deception \cite{taylor2013detecting}. Hence, detection of mimicry can be a valuable indicator in dyadic conversations as well as group dynamics in collaborative settings \cite{scissors2009cmc}. Potential applications include promoting cooperation, detecting malintent, and identifying leaders.
 
-There are a number of measures designed to capture mimicry in text, and some efforts have been made to compare and trial some of these techniques \cite{xu2015evaluation}. However, few techniques are grounded in what cognitive  science knows about how mimicry works within humans. That is to say, few of the existing techniques are designed to measure the linguistic components of mimicry as specified by contemporary models from cognitive science.
+There are a number of measures designed to capture mimicry in text, and some efforts have been made to compare and trial some of these techniques \cite{xu2015evaluation}. However, few techniques are grounded in what cognitive science knows about how mimicry works within humans. That is to say, few of the existing techniques are designed to measure the linguistic components of verbal mimicry as specified by contemporary models from cognitive science.
 
 This paper addresses this limitation by contrasting how well existing linguistic analysis techniques work to detect mimicry in relation to a prominent model of human interpersonal mimicry, the Interactive Alignment Model. Further, we consider some existing techniques that have not previously been used to detect mimicry and discuss their viability. The novel contributions of this paper are as follows:
 \begin{itemize}
@@ -171,20 +63,21 @@ This paper addresses this limitation by contrasting how well existing linguistic
 
 The rest of this paper is structured as follows. In Section II, we briefly introduce the Interactive Alignment Model. Section III provides a brief introduction to each measure tested in the paper, and defines the layer of the IAM (if any) in which the measure appears to reside. Section IV describes the data set used in our analysis. Section V presents the results of our analysis and highlights how current techniques fit into the IAM in practice. Finally, Section VI concludes the paper and identifies directions for future work.
 
-
 \section{The Interactive Alignment Model}
-The Interactive Alignment Model (IAM) \cite{pickering2004toward}, shown in Fig. \ref{iam} is an attempt to model alignment in conversations. It consists of six layers, which with the exception of the top layer, the situation model, are all representations of some aspect of speech, as understood by each speaker within an interaction. In basic terms:
+In order to achieve conversation, two or more interactants must work together to establish a joint understanding of what they are talking about. The Interactive Alignment Model (IAM) \cite{pickering2004toward, garrod2004conversation}, shown in Fig. \ref{iam} is an attempt to model such alignment as it occurs over time in conversations. It consists of six layers, which with the exception of the top layer, the situation model, are all representations of different linguistic levels at the same time, as understood by each speaker within an interaction. In basic terms, these levels are:
 
 \begin{enumerate}
 	\item The situation model --- a representation of the situation being discussed
-	\item The semantic representation --- the meaning of the utterance
+	\item The semantic representation --- the meaning of the utterance in terms of what it stands to convey.
 	\item The syntactic representation --- the sentence structure
 	\item The lexical representation --- the choice of words used
 	\item The phonological representation --- the abstract representation of word sounds
 	\item The phonetic representation --- the sounds of an utterance
 \end{enumerate}
 
-The theory states that alignment is automatic, that conversation partners will align their speech  towards each other at every level of the model. In addition, alignment "percolates" between layers such that increased alignment in one layer will lead to increased alignment in other layers.
+The theory states that alignment is automatic and that conversation partners will 'interactively align' their speech  towards each other at every level of the model. The observable behavior of such alignment is greater mimicry at each layer.
+
+The IAM also postulates how such alignment emerges over time. It suggests that alignment 'percolates' between layers such that increased alignment in one layer will lead to increased alignment in other layers. For example, tightening the semantic representation will naturally restrict the number of words and syntactic structures that can be used to convey that meaning. Similarly, particular word choices may shape the kinds of semantic representations that become prominent. In short, alignment at one level enables a listener to fill in the gaps and appropriately mimic at another level.
 
 The phonological and phonetic representations are not discussed in this paper as they relate purely to the sound of speech, representations that do not exist in the written text of online conversations. Further, the situation model is not included as there are currently no measures that can be used for finding alignment at the situational level.
 
@@ -213,13 +106,13 @@ Syntactic Indiscriminate Local Linguistic Alignemnt (SILLA) works at the syntact
 
 
 \subsection{Word Vectors}
-Word2vec \cite{mikolov2013efficient} is a machine learning technique that, given a word, tries to predict the two adjacent words. Each word is then mapped to vector space and can be directly compared. The closer the two word vectors to each other, the more semantically related they are.
+Word2vec \cite{mikolov2013efficient, mikolov2013distributed} is a machine learning technique that, given a word, tries to predict the two adjacent words. Each word is then mapped to vector space and can be directly compared. The closer the two word vectors to each other, the more semantically related they are.
 
 While word vectors have not been used to measure mimicry before, we posit that it may give good results for finding mimicry as it is used for finding semantic similarity in text, we would expect it to also find semantic mimicry.
 
 
 \subsection{Language Style Matching}
-Language Style Matching (LSM) \cite{ireland2010language} is a measure that counts the usage of function words by an interlocutor. For each class of function word (e.g., determiners, pronouns, adpositions), the number of words is  calculated as a percentage of the total document, which is the score for each class. Scores are calculated between the dyad using a weighted difference, shown below, and these scores averaged to produce a single LSM score for that dyad.
+Language Style Matching (LSM) \cite{ireland2010language, ireland2011language} is a measure that counts the usage of function words by an interlocutor. For each class of function word (e.g., determiners, pronouns, adpositions), the number of words is  calculated as a percentage of the total document, which is the score for each class. Scores are calculated between the dyad using a weighted difference, shown below, and these scores averaged to produce a single LSM score for that dyad.
 
 \[ LSM_{class} = 1 - [(|class_1 - class_2|)] / (class_1 + class_2 + .0001) \]
 
@@ -275,7 +168,7 @@ Layer, Technique & r & p \\
 \hline
 Lexical, LILLA & 0.27 & 0.005 \\
 Syntactic, SILLA & 0.19 & 0.057 \\
-Semantic, Word2vec & 0.11 & 0.231 \\
+Semantic, Word2vec & 0.13 & 0.178 \\
 Lexical, LSM & 0.14 & 0.158 \\
 Syntactic, LSM & 0.31 & 0.002 \\
 Semantic, LSM & -0.13 & 0.202 \\
@@ -294,8 +187,8 @@ Table \ref{scores_techniques} shows the correlations between the mean scores fro
 Technique & r & p \\
 \hline
 LILLA, SILLA & 0.26 & 0.007 \\
-LILLA, Word2vec & -0.31 & 0.002 \\
-SILLA, Word2vec & -0.81 & < 0.001
+LILLA, Word2vec & -0.30 & 0.005 \\
+SILLA, Word2vec & -0.82 & < 0.001
 \end{tabular}
 \end{table}
 
@@ -330,20 +223,11 @@ Our results further show support for the IAM's theory that mimicry in one layer 
 
 More research is needed, particularly in the methods used to detect mimicry by computational analysis. There are many more measures, such as the Hierarchical Alignment Model \cite{doyle2016robust}, Zelig \cite{jones2014finding} and RepDecay \cite{reitter2006computational}, some of which should fit neatly into the lexical and syntactic layers, and some that do not have any basis in the IAM. Our data set is small, and using a larger data set, ideally with a greater number of human classifiers would be useful for a more extensive investigation of the phenomenon highlighted in this paper.
 
-More work is especially required to find if word vectors or related techniques can be used to find semantic mimicry with different methodology than ours, perhaps by parsing the text differently, running the measure on all utterances of each pair, rather than averaging the similarity over each pair of messages. More research in general is suggested in finding ways to capture mimicry at the semantic layer, and so far there is very little work looking at alignment at the situation layer.
+More work is especially required to find if word vectors or related techniques can be used to find semantic mimicry with different methodology than ours, perhaps by parsing the text differently or experimenting with differently trained models. More research in general is suggested in finding ways to capture mimicry at the semantic layer, and so far there is very little work looking at alignment at the situation layer.
 
 
 \section*{Acknowledgment}
 This research is funded by the Engineering and Social Sciences (ESRC) Centre for Research and Evidence on Security Threats (CREST).
-
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
 
 \printbibliography
 
