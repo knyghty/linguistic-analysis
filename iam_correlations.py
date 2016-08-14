@@ -14,7 +14,7 @@ with open(os.path.join(constants.DATA_DIR, 'classifications.pickle'), 'rb') as c
 
 
 scores_dict = {}
-for measure in ['lilla', 'silla', 'wv']:
+for measure in ['lsm', 'lilla', 'silla', 'wv']:
     scores_dict[measure] = [chain_scores[measure] for chain_scores in scores.values()]
 
 for measure_a, measure_b in itertools.combinations(scores_dict.keys(), 2):
