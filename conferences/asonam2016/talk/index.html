@@ -133,6 +133,7 @@ def lla(target, prime):
 				<section>
 					<h1>?</h1>
 					<h3>Language Style Matching</h3>
+					<p>\[ LSM_{class} = 1 - [(|class_1 - class_2|)] / (class_1 + class_2 + .0001) \]</p>
 					<ul>
 						<li>Looks at different classes of function words to score a text</li>
 						<li>e.g. articles, adverbs, etc.</li>
@@ -357,6 +358,22 @@ def lla(target, prime):
 					</ul>
 				</section>
 
+				<section>
+					<h1>References</h1>
+					<dl>
+						<dt>Interactive Alignment Model</dt>
+						<dd>M. J. Pickering and S. Garrod, “Toward a mechanistic psychology of dialogue,” Behavioral and brain sciences, vol. 27, no. 02, pp. 169–190, 2004.</dd>
+
+						<dt>Local Linguistic Alignment (LLA, LILLA, SILLA)</dt>
+						<dd>Y. Wang, D. Reitter, and J. Yen, “Linguistic adaptation in conversation threads: Analyzing alignment in online health communities,” ACL 2014, p. 55, 2014.</dd>
+
+						<dt>Word Vectors</dt>
+						<dd>T. Mikolov, I. Sutskever, K. Chen, G. S. Corrado, and J. Dean, “Distributed representations of words and phrases and their compositionality,” in Advances in neural in-formation processing systems, 2013, pp. 3111–3119.</dd>
+						<dt>Language Style Matching (LSM)</dt>
+						<dd>M. E. Ireland, R. B. Slatcher, P. W. Eastwick, L. E. Scissors, E. J. Finkel, and J. W. Pennebaker, “Language style matching predicts relationship initiation and stability,” Psychological Science, vol. 22, no. 1, pp. 39–44, 2011.</dd>
+					</dl>
+				</section>
+
 			</div>
 		</div>
 
@@ -367,6 +384,11 @@ def lla(target, prime):
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+
+				math: {
+	        mathjax: 'js/mathjax/MathJax.js',
+					config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    		},
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
