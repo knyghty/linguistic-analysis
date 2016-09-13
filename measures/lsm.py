@@ -23,7 +23,7 @@ def liwc_lsm(doc):
         for function_class in LIWC_DATA:
             for function_word in function_class:
                 if function_word.endswith('*'):
-                    if word.startswith(function_word):
+                    if word.startswith(function_word[:-1]):
                         function_words[function_class] += 1
                 else:
                     if word == function_word:
