@@ -1,9 +1,0 @@
-My name is Tom Carrick. I'm a first year PhD student at Lancaster University and my work is on the role of mimicry in decepption.
-
-Mimicry refers to immitation of language and actions in communication. It's been shown to be important in many aspects of interpersonal relationships, such as reaching successful outcomes of joint tasks as well as being a good indicator for good relationships and rapport in general. Importantly for us in security, mimicry can be used as an indicator of deceptive behaviour and could be used to find insider threats.
-
-So far I've been looking at the detection of mimicry, using some established algorithms such as language style matching to find mimicry in conversations and compare these results with results from human analyists. So far I've found that these computational methods are promising and work well and very quickly, but less accurately than humans. I've also been working towards making these techniques more accurate and looking at how data can be pre-processed to gain accuracy from the existing measures.
-
-In the future I'm planning to further our understanding of mimicry by creating a chatbot that alters its speech to mimic the human its speaking with to varying degrees, to find any sweet spot of mimicry that may exist for maximising rapport and positive outcomes of interactions.
-
-You can stay updated with my research on the CREST website at www.crestresearch.ac.uk
