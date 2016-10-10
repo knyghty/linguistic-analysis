@@ -248,6 +248,6 @@ TSWLatexianTemp*
 .env
 .venv
 *.pickle
-html/*
+la/html/*
 la/data/*
 !.gitkeep
